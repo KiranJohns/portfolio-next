@@ -1,118 +1,119 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import React, { Suspense, useState, useEffect, useCallback } from 'react';
+import { Canvas } from '@react-three/fiber';
+import Loader from '../components/Loader';
 
-const inter = Inter({ subsets: ["latin"] });
+import Islands from '../models/Islands';
+import Sky from '../models/Sky';
+import Bird from '../models/Bird'
+import Plane from '../models/Plane';
+import HomeInfo from '../components/HomeInfo';
+import Loading1 from '../components/Loading1';
+import Navbar from '../components/Navbar';
 
-export default function Home() {
+const Home = () => {
+  const [currentStage, setCurrentStage] = useState(1);
+  const [isRotating, setIsRotating] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [islandSettings, setIslandSettings] = useState({
+    scale: [1, 1, 1],
+    position: [0, -6.5, -43],
+    rotation: [0.1, 4.7, 0]
+  });
+  const [planeSettings, setPlaneSettings] = useState({
+    scale: [3, 3, 3],
+    position: [0, -4, -4]
+  });
+
+  const adjustIslandForScreenSize = useCallback(() => {
+    let screenScale;
+    let screenPosition = [0, -6.5, -43];
+    let rotation = [0.1, 4.7, 0];
+
+    if (window.innerWidth < 768) {
+      screenScale = [0.67, 0.67, 0.67];
+    } else {
+      screenScale = [1, 1, 1];
+    }
+
+    setIslandSettings({ scale: screenScale, position: screenPosition, rotation });
+  }, []);
+
+  const adjustPlaneForScreenSize = useCallback(() => {
+    let screenScale, screenPosition;
+
+    if (window.innerWidth < 768) {
+      screenScale = [1.25, 1.25, 1.25];
+      screenPosition = [0, -1.5, 0];
+    } else {
+      screenScale = [3, 3, 3];
+      screenPosition = [0, -4, -4];
+    }
+
+    setPlaneSettings({ scale: screenScale, position: screenPosition });
+  }, []);
+
+  useEffect(() => {
+    adjustIslandForScreenSize();
+    adjustPlaneForScreenSize();
+
+    const handleResize = () => {
+      adjustIslandForScreenSize();
+      adjustPlaneForScreenSize();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [adjustIslandForScreenSize, adjustPlaneForScreenSize]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div>
+      {isLoading ? (
+        <Loading1 />
+      ) : (
+
+        <section className='w-full h-screen relative'>
+                  <Navbar />
+          <div className='absolute top-20 left-0 right-0 z-10 flex items-center justify-center'>
+            {currentStage && <HomeInfo currentStage={currentStage} />}
+          </div>
+          <Canvas
+            className={`w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
+            camera={{ near: 0.1, far: 1000 }}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+            <Suspense fallback={<Loader />}>
+              <directionalLight position={[1, 1, 1]} intensity={1.7} />
+              <ambientLight intensity={0.5} />
+              <hemisphereLight skyColor="#b1e1ff" groundColor="#000000" intensity={1} />
+              <Bird />
+              <Sky isRotating={isRotating} />
+              <Islands
+                position={islandSettings.position}
+                scale={islandSettings.scale}
+                rotation={islandSettings.rotation}
+                setCurrentStage={setCurrentStage}
+                isRotating={isRotating}
+                setIsRotating={setIsRotating}
+              />
+              <Plane
+                scale={planeSettings.scale}
+                isRotating={isRotating}
+                position={planeSettings.position}
+                rotation={[0, 20, 0]}
+              />
+            </Suspense>
+          </Canvas>
+        </section>
+      )}
+    </div>
   );
-}
+};
+
+export default Home;
