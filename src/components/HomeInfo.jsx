@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { arrow } from '../assets/icons';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const swipe1 = "Rotate the island to see more ➟";
 const HomeInfo = ({ currentStage }) => {
@@ -16,9 +18,9 @@ const HomeInfo = ({ currentStage }) => {
 const InfoBox = ({ text, link, btnText }) => (
   <div className='info-box'>
     <p className="font-medium sm:text-xl text-center">{text}</p>
-    <Link to={link} className='neo-brutalism-white neo-btn'>
+    <Link href={link} className='neo-brutalism-white neo-btn'>
       {btnText}
-      <img src={arrow} alt="arrow" />
+      <Image src={arrow} alt="arrow" />
     </Link>
   </div>
 );

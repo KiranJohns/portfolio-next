@@ -10,6 +10,9 @@ import HomeInfo from '../components/HomeInfo';
 import Loading1 from '../components/Loading1';
 import Navbar from '../components/Navbar';
 
+
+
+
 const Home = () => {
   const [currentStage, setCurrentStage] = useState(1);
   const [isRotating, setIsRotating] = useState(false);
