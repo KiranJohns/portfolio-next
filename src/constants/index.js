@@ -121,7 +121,7 @@ export const experiences = [
         company_name: "Brototype Intern",
         icon: starbucks,
         iconBg: "#accbe1",
-        date: "April 2022 - Sept 2022",
+        date: "Feb 2022 - July 2022",
         points: [
             "Developing and maintaining web applications using HTML CSS and Javascript.",
             "Created a full stack project using express Js",
@@ -144,15 +144,15 @@ export const experiences = [
     // },
     {
         title: "Full stack Developer",
-        company_name: "Freelance",
+        company_name: "Orca Technologies",
         icon: shopify,
         iconBg: "#b7e4c7",
-        date: "Oct 2022 - Jan 2023",
+        date: "July 2022 - Dec 2022",
         points: [
             "Developing and maintaining web applications using HTML, CSS, JS, jQuery and CodeIgniter.",
             "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
             "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Completed 'The DaleView Care Point' project and manintenance and updation of few other projects."
+            "Completed 'The DaleView Care Point' project and many other projects"
         ],
     },
     {
@@ -162,10 +162,24 @@ export const experiences = [
         iconBg: "#a2d2ff",
         date: "Jan 2023 - Feb 2025",
         points: [
-            "Developing and maintaining web applications using React.js and other related technologies and basic API using Express js",
+            "Developing and maintaining web applications using React.js/Next.js and other related technologies and working with basic API using Express js",
             "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
             "Implementing responsive design and ensuring cross-browser compatibility.",
             "Completed many projects including 'Learn For Care', 'Astra Nova Careers' etc..",
+        ],
+    },
+    {
+        title: "Front End Developer",
+        company_name: "Freelance",
+        icon: meta,
+        iconBg: "#EEDD82",
+        date: "Feb 2025 - Present",
+        points: [
+            "Partnered with clients to design and develop custom web solutions tailored to specific business needs.",
+            "Built user-friendly interfaces and interactive components using React.js/Next.js, ensuring smooth user experiences.",
+            "Handled complete project lifecycles — from initial consultation and wireframing to deployment and post-launch support.",
+            "Delivered projects across various domains including portfolios, e-commerce platforms, and admin dashboards for startups and small businesses."
+           
         ],
     },
 ];
