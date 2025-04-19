@@ -121,7 +121,7 @@ export const experiences = [
         company_name: "Brototype Intern",
         icon: starbucks,
         iconBg: "#accbe1",
-        date: "March 2022 - Sept 2022",
+        date: "April 2022 - Sept 2022",
         points: [
             "Developing and maintaining web applications using HTML CSS and Javascript.",
             "Created a full stack project using express Js",
@@ -144,10 +144,10 @@ export const experiences = [
     // },
     {
         title: "Full stack Developer",
-        company_name: "Liexa Creations",
+        company_name: "Freelance",
         icon: shopify,
         iconBg: "#b7e4c7",
-        date: "Dec 2022 - April 2023",
+        date: "Oct 2022 - Jan 2023",
         points: [
             "Developing and maintaining web applications using HTML, CSS, JS, jQuery and CodeIgniter.",
             "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
@@ -157,10 +157,10 @@ export const experiences = [
     },
     {
         title: "Front End Developer",
-        company_name: "Freelance",
+        company_name: "Heron Design",
         icon: meta,
         iconBg: "#a2d2ff",
-        date: "May 2023 - Present",
+        date: "Jan 2023 - Feb 2025",
         points: [
             "Developing and maintaining web applications using React.js and other related technologies and basic API using Express js",
             "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
@@ -199,9 +199,9 @@ export const projects = [
     {
         iconUrl: nextjs,
         theme: 'btn-back-green',
-        name: 'Astra Nova Career',
-        description: 'Developed a full-stack application using Next.js for the front end and Express.js for the back end for Astra Nova Careers, a job consultancy primarily focused on healthcare sector jobs.',
-        link: 'https://www.astranova.co.in/',
+        name: 'Orca Technologies',
+        description: 'Developed for Orca Technologies using React Js, Tailwind and Three Js for 3d features. The site focuses on clean design, smooth user experience, and responsive layouts for all devices.',
+        link: 'https://www.orcat.in/',
     },
     {
         iconUrl: html,
@@ -215,20 +215,20 @@ export const projects = [
         theme: 'btn-back-pink',
         name: 'Aden Digital',
         description: 'Built a website for "Aden Digital", using HTML, CSS and Js. ',
-        link: 'https://vizhinjamvarf.com',
+        link: 'https://varf.vercel.app/',
     },
     {
         iconUrl: html,
         theme: 'btn-back-black',
         name: 'VARF',
         description: 'Developed a web application for "VARF", using HTML, CSS and Js.',
-        link: 'https://vizhinjamvarf.com',
+        link: 'https://varf.vercel.app/',
     },
     {
         iconUrl: html,
         theme: 'btn-back-yellow',
-        name: 'Noble Enterprises',
-        description: 'esigned and built a web app for "Noble Enterprise", which built on HTML, CSS, Js and CodeIgniter',
-        link: 'https://www.nobleenterprises.co'
+        name: 'Pheonix Arts',
+        description: 'Designed and built a web app for "Pheonix Arts", which built on Next Js, Tailwind and Email Js',
+        link: 'https://pheonix-beige.vercel.app'
     }
 ];
